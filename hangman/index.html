@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="el-Gr">
+
+<head>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="description" content="Το κλασσικό παιχνίδι της κρεμάλας. Ο ένας παίκτης βάζει μια λέξη και ο άλλος/οι άλλοι προσπαθεί/προσπαθούν να την βρει">
+    <meta name="keywords" content="Κρεμάλα, παιχνίδι, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="subject" content="Αυτό είναι το κλασσικό παιχνίδι της κρεμάλας">
+    <meta name="copyright" content="Παύλος Α. Ορφανίδης">
+    <meta name="language" content="el-Gr">
+    <meta name="robots" content="index,follow" />
+    <meta name="revised" content="Sunday, August 1st, 2020, 5:15 pm" />
+    <meta name="abstract" content="">
+    <meta name="topic" content="Ένα απλό παιχνιδάκι για να περάσετε δημιουργικά τον χρόνο σας">
+    <meta name="Classification" content="Entertainment">
+    <meta name="author" content="Pavlos A. Orfanidis, pavlos@orfanidis.xyz">
+    <meta name="designer" content="Pavlos A. Orfanidis">
+    <meta name="copyright" content="Pavlos A. Orfanidis">
+    <meta name="reply-to" content="pavlos@orfanidis.xyz">
+    <meta name="owner" content="Pavlos A. Orfanidis">
+    <meta name="url" content="http://cse.uoi.gr/~cse74134/hangman">
+    <meta name="identifier-URL" content="http://cse.uoi.gr/~cse74134/hangman">
+    <meta name="category" content="Entertainment">
+    <meta name="coverage" content="Worldwide">
+    <meta name="distribution" content="Global">
+    <meta name="rating" content="General">
+    <meta name="revisit-after" content="7 days">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+
+
+    <meta name="og:title" content="Κρεμάλα" />
+    <meta name="og:type" content="game" />
+    <meta name="og:url" content="http://cse.uoi.gr/~cse74134/hangman" />
+    <meta name="og:image" content="http://cse.uoi.gr/~cse74134/hangman/hangman/10.jpg" />
+    <meta name="og:site_name" content="Κρεμάλα" />
+    <meta name="og:description" content="Το κλασσικό παιχνίδι της κρεμάλας. Ο ένας παίκτης βάζει μια λέξη και ο άλλος/οι άλλοι προσπαθεί/προσπαθούν να την βρει." />
+
+    <title>Κρεμάλα</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel:400,700,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/barfiller.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <!-- Hero Section Begin -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="hs-text">
+
+                        <div class="sidebar-option">
+
+                            <!--HangMan Input Word-->
+
+                            <div id="word-input" class="subscribe-option">
+                                <div class="section-title">
+                                    <h5>Βάλε Λέξη παρακαλώ</h5>
+                                </div>
+                                <p>Πληκτρολογίστε μία η περισσότερες λέξεις</p>
+                                <form method="POST" id="word">
+                                    <input id="input-word" name="word" type="text" placeholder="Λέξη">
+                                    <p>
+                                        <span id="hidden" style="color: #ffff; cursor: pointer;" onclick="if(this.innerText=='Εμφάνηση'){this.innerText='Απόκρυψη';document.getElementById('input-word').type='text'}else{this.innerText='Εμφάνηση';document.getElementById('input-word').type='password'}"> Απόκρυψη </span>
+                                    </p>
+                                    <button type="submit"><span>Υποβολή</span></button>
+                                </form>
+
+                            </div>
+                            <!--/HangMan Input Word-->
+                            <div id="hangman" style="display: none;" class="subscribe-option">
+                                <div class="section-title">
+                                    <h5>Εύρεση Λέξης></h5>
+                                </div>
+                                <p>Επιλέξτε γράμματα</p>
+                                <p style="font-size: large;" id="letters"></p>
+                                <img src="./hangman/0.jpg" id="hangman-image">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <p style="font-size: xx-large;color: #ffff;" class="hs-text" id="hangman-word-hidden"></p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slider owl-carousel">
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="img/hero/hero-3.jpg"></div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+
+        <div class="copyright-area">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ca-text">
+                        <p>
+                            Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | This website is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://cse.uoi.gr/~cse74134" target="_blank">Paul A. Orfanidis</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ca-links">
+                        <a href="http://cse.uoi.gr/~cse74134/mainpage/about.html" target="_blank">About</a>
+                        <!--
+                        <a href="#">Subscribe</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Support</a>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- Footer Section End -->
+
+
+    <!-- Js Plugins -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/circle-progress.min.js"></script>
+    <script src="js/jquery.barfiller.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        function baseName(str) {
+            var base = new String(str).substring(str.lastIndexOf('/') + 1);
+            if (base.lastIndexOf(".") != -1)
+                base = base.substring(0, base.lastIndexOf("."));
+            return base;
+        }
+
+        function refresh_view(first_word, letter_dict) {
+            var has_won = true;
+            var word = "";
+            console.log("Inserting into the refresh view function");
+            for (var letter in first_word.split('')) {
+                console.log(letter);
+                if (letter_dict[first_word[letter]]) {
+                    word += first_word[letter] + " ";
+                } else {
+                    has_won = false;
+                    word += "_ ";
+                }
+            }
+            return [word, has_won];
+        }
+
+
+
+        $("#word").submit(function(e) {
+            e.preventDefault();
+            const word = e.target[0].value.replace(/Ά|Α|ά/g, 'α').replace(/Έ|Ε|έ/g, 'ε').replace(/Ή|Η|ή/g, 'η').replace(/Ύ|υ|ύ/g, 'υ').replace(/Ώ|ω|ώ/g, 'ω').toUpperCase();
+            const show_word = {};
+            word.split("").forEach((letter, index) => {
+                show_word[letter] = false;
+            });
+
+
+            console.log("Just before the first refresh of the hangman");
+            console.log(word);
+            document.getElementById("hangman-word-hidden").innerText = refresh_view(word, show_word)[0];
+
+            document.getElementById("word-input").style.display = "none";
+
+            const lettersList = document.getElementById("letters");
+            "Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω".split(" ").forEach((index, letter) => {
+                const spanElement = document.createElement("span");
+                const text = document.createTextNode(index);
+                spanElement.appendChild(text);
+                spanElement.id = index;
+                spanElement.style.cursor = "pointer";
+                spanElement.onclick = () => {
+                    if (document.getElementById(index).classList.contains("wrong")) {
+                        return;
+                    }
+                    if (word.includes(index)) {
+                        show_word[index] = true;
+
+                        console.log("The user has pressed a correct letter.");
+                        console.log(index + " : " + show_word[index]);
+
+                        const data = refresh_view(word, show_word);
+                        document.getElementById("hangman-word-hidden").innerText = data[0];
+                        has_won = data[1];
+                        if (has_won) {
+                            alert("Συγχαρητήρια!!! Βρήκατε την λέξη");
+                            location.reload();
+                            return;
+                        }
+                        return;
+                    }
+
+                    document.getElementById(index).classList.add("wrong");
+                    const hangmanImage = document.getElementById("hangman-image");
+                    const link = hangmanImage.src;
+                    const nextImageIndex = parseInt(baseName(link)) + 1;
+
+                    if (nextImageIndex == 10) {
+                        alert("Έχεις ακόμα μία προσπάθεια.");
+                    }
+
+                    if (nextImageIndex > 10) {
+                        alert("Εχασες.");
+                        location.reload();
+                        return;
+                    }
+
+                    const nextImage = nextImageIndex + ".jpg";
+                    console.log(nextImage);
+                    hangmanImage.src = "./hangman/" + nextImage;
+                };
+                lettersList.appendChild(spanElement);
+                lettersList.appendChild(document.createTextNode(" "));
+                //lettersList.appendChild(spaceElement.cloneNode());
+            })
+            document.getElementById("hangman").style.display = "block";
+        });
+    </script>
+
+</body>
+
+</html>
