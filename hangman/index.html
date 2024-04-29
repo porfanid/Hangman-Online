@@ -4,43 +4,17 @@
 <head>
     <script src="js/jquery-3.3.1.min.js"></script>
     <meta charset="UTF-8">
-    <meta name="description" content="Το κλασσικό παιχνίδι της κρεμάλας. Ο ένας παίκτης βάζει μια λέξη και ο άλλος/οι άλλοι προσπαθεί/προσπαθούν να την βρει">
-    <meta name="keywords" content="Κρεμάλα, παιχνίδι, creative, html">
+    <meta name="description" content="Classic hangman game where one player enters a word and the others try to guess it.">
+    <meta name="keywords" content="Hangman, game, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hangman</title>
 
-    <meta name="subject" content="Αυτό είναι το κλασσικό παιχνίδι της κρεμάλας">
-    <meta name="copyright" content="Παύλος Α. Ορφανίδης">
-    <meta name="language" content="el-Gr">
-    <meta name="robots" content="index,follow" />
-    <meta name="revised" content="Sunday, August 1st, 2020, 5:15 pm" />
-    <meta name="abstract" content="">
-    <meta name="topic" content="Ένα απλό παιχνιδάκι για να περάσετε δημιουργικά τον χρόνο σας">
-    <meta name="Classification" content="Entertainment">
-    <meta name="author" content="Pavlos A. Orfanidis, pavlos@orfanidis.xyz">
-    <meta name="designer" content="Pavlos A. Orfanidis">
-    <meta name="copyright" content="Pavlos A. Orfanidis">
-    <meta name="reply-to" content="pavlos@orfanidis.xyz">
-    <meta name="owner" content="Pavlos A. Orfanidis">
-    <meta name="url" content="http://cse.uoi.gr/~cse74134/hangman">
-    <meta name="identifier-URL" content="http://cse.uoi.gr/~cse74134/hangman">
-    <meta name="category" content="Entertainment">
-    <meta name="coverage" content="Worldwide">
-    <meta name="distribution" content="Global">
-    <meta name="rating" content="General">
-    <meta name="revisit-after" content="7 days">
-    <meta http-equiv="Expires" content="0">
-    <meta http-equiv="Pragma" content="no-cache">
+    <!-- Font Awesome for flag icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-
-    <meta name="og:title" content="Κρεμάλα" />
-    <meta name="og:type" content="game" />
-    <meta name="og:url" content="http://cse.uoi.gr/~cse74134/hangman" />
-    <meta name="og:image" content="http://cse.uoi.gr/~cse74134/hangman/hangman/10.jpg" />
-    <meta name="og:site_name" content="Κρεμάλα" />
-    <meta name="og:description" content="Το κλασσικό παιχνίδι της κρεμάλας. Ο ένας παίκτης βάζει μια λέξη και ο άλλος/οι άλλοι προσπαθεί/προσπαθούν να την βρει." />
-
-    <title>Κρεμάλα</title>
+    <!-- Custom CSS for language toggle -->
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -55,6 +29,7 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/language-toggle.css" type="text/css">
 </head>
 
 <body>
@@ -62,42 +37,56 @@
     <div id="preloder">
         <div class="loader"></div>
     </div>
+
     <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="hs-text">
-
                         <div class="sidebar-option">
-
-                            <!--HangMan Input Word-->
-
+                            <!-- Hangman Input Word -->
+                            <!-- Language Toggle -->
+    <div class="language-toggle text-white">
+        <button style="color: #ffff;"  onclick="toggleLanguage('el')"> <!-- Greek Language -->
+            <i class="flag-icon flag-icon-gr"></i> Ελληνικά
+        </button>
+        <button style="color: #ffff;" onclick="toggleLanguage('en')"> <!-- English Language -->
+            <i class="flag-icon flag-icon-us"></i> English
+        </button>
+    </div>
                             <div id="word-input" class="subscribe-option">
                                 <div class="section-title">
-                                    <h5>Βάλε Λέξη παρακαλώ</h5>
+                                    <h5 class="lang-el">Βάλε Λέξη παρακαλώ</h5>
+                                    <h5 class="lang-en hidden">Enter a Word Please</h5>
                                 </div>
-                                <p>Πληκτρολογίστε μία η περισσότερες λέξεις στα ελληνικά</p>
+                                <p class="lang-el">Πληκτρολογίστε μία ή περισσότερες λέξεις στα ελληνικά</p>
+                                <p class="lang-en hidden">Type one or more words in Greek</p>
                                 <form method="POST" id="word">
                                     <input id="input-word" name="word" type="text" placeholder="Λέξη">
                                     <p>
-                                        <span id="hidden" style="color: #ffff; cursor: pointer;" onclick="if(this.innerText=='Εμφάνηση'){this.innerText='Απόκρυψη';document.getElementById('input-word').type='text'}else{this.innerText='Εμφάνηση';document.getElementById('input-word').type='password'}"> Απόκρυψη </span>
+                                        <span id="hidden" style="color: #ffff; cursor: pointer;" onclick="togglePasswordVisibility()"> Απόκρυψη </span>
                                     </p>
-                                    <button type="submit"><span>Υποβολή</span></button>
-                                </form>
+                                    <button class="lang-el" type="submit">
+                                        <span>Υποβολή</span>
+                                    </button>
 
+                                    <button class="lang-en hidden" type="submit">
+                                        <span>Submit</span>
+                                    </button>
+                                </form>
                             </div>
-                            <!--/HangMan Input Word-->
+                            <!-- /Hangman Input Word -->
                             <div id="hangman" style="display: none;" class="subscribe-option">
                                 <div class="section-title">
-                                    <h5>Εύρεση Λέξης></h5>
+                                    <h5 class="lang-el">Εύρεση Λέξης</h5>
+                                    <h5 class="lang-en hidden">Find Word</h5>
                                 </div>
-                                <p>Επιλέξτε γράμματα</p>
+                                <p class="lang-el">Επιλέξτε γράμματα</p>
+                                <p class="lang-en hidden">Select letters</p>
                                 <p style="font-size: large;" id="letters"></p>
                                 <img src="./hangman/0.jpg" id="hangman-image">
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -114,38 +103,32 @@
     </section>
     <!-- Hero Section End -->
 
-
     <!-- Footer Section Begin -->
     <footer class="footer-section">
-
         <div class="copyright-area">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="ca-text">
                         <p>
-                            Copyright &copy;
+                            <span class="lang-el">Πνευματικά δικαιώματα &copy;</span>
+                            <span class="lang-en hidden">Copyright &copy;</span>
                             <script>
                                 document.write(new Date().getFullYear());
-                            </script> All rights reserved | This website is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://github.com/porfanid" target="_blank">Paul A. Orfanidis</a>
+                            </script> <span class="lang-el">Με επιφύλαξη παντός δικαιώματος | Αυτός ο ιστότοπος δημιουργήθηκε με <i class="fa fa-heart" aria-hidden="true"></i> από <a href="https://github.com/porfanid" target="_blank">Παύλος Α. Ορφανίδης</a></span>
+                            <span class="lang-en hidden">All rights reserved | This website is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://github.com/porfanid" target="_blank">Paul A. Orfanidis</a></span>
                         </p>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="ca-links">
-                        <a href="https://github.com/porfanid" target="_blank">About</a>
-                        <!--
-                        <a href="#">Subscribe</a>
-                        <a href="#">Contact</a>
-                        <a href="#">Support</a>
-                        -->
+                        <a href="https://github.com/porfanid" target="_blank" class="lang-el">Σχετικά</a>
+                        <a href="https://github.com/porfanid" target="_blank" class="lang-en hidden">About</a>
                     </div>
                 </div>
             </div>
         </div>
-
     </footer>
     <!-- Footer Section End -->
-
 
     <!-- Js Plugins -->
     <script src="js/bootstrap.min.js"></script>
@@ -157,6 +140,8 @@
     <script src="js/main.js"></script>
     <script src="js/hangman.js"></script>
 
+    <!-- Custom Script for Language Toggle -->
+    <script src="js/language-toggle.js"></script>
 </body>
 
 </html>

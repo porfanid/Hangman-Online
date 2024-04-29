@@ -1,3 +1,6 @@
+var greek_alphabet = "Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω";
+var english_alphabet = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z";
+var alphabet;
 function baseName(str) {
             var base = new String(str).substring(str.lastIndexOf('/') + 1);
             if (base.lastIndexOf(".") != -1)
@@ -29,6 +32,11 @@ function baseName(str) {
             const word = e.target[0].value.replace(/Ά|Α|ά/g, 'α').replace(/Έ|Ε|έ/g, 'ε').replace(/Ή|Η|ή/g, 'η').replace(/Ύ|υ|ύ/g, 'υ').replace(/Ώ|ω|ώ/g, 'ω').toUpperCase();
             const show_word = {};
             word.split("").forEach((letter, index) => {
+                if(greek_alphabet.includes(letter)){
+                    alphabet=greek_alphabet;
+                }else{
+                    alphabet=english_alphabet;
+                }
                 show_word[letter] = false;
             });
 
@@ -40,7 +48,7 @@ function baseName(str) {
             document.getElementById("word-input").style.display = "none";
 
             const lettersList = document.getElementById("letters");
-            "Α Β Γ Δ Ε Ζ Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ Σ Τ Υ Φ Χ Ψ Ω".split(" ").forEach((index, letter) => {
+            alphabet.split(" ").forEach((index, letter) => {
                 const spanElement = document.createElement("span");
                 const text = document.createTextNode(index);
                 spanElement.appendChild(text);

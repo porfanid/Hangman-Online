@@ -1,0 +1,20 @@
+/* Custom CSS for Language Toggle */
+.language-toggle {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.language-toggle button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+.flag-icon {
+    margin-right: 5px;
+}
+
+.hidden {
+    display: none;
+}
