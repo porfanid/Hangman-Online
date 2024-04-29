@@ -68,7 +68,11 @@ function baseName(str) {
                         document.getElementById("hangman-word-hidden").innerText = data[0];
                         has_won = data[1];
                         if (has_won) {
-                            alert("Συγχαρητήρια!!! Βρήκατε την λέξη");
+                            if (global_lang === 'el') {
+                                alert("Συγχαρητήρια!!! Βρήκατε την λέξη");
+                            }else{
+                                alert("Congratulations!!! You have found the word");
+                            }
                             location.reload();
                             return;
                         }
@@ -81,11 +85,19 @@ function baseName(str) {
                     const nextImageIndex = parseInt(baseName(link)) + 1;
 
                     if (nextImageIndex == 10) {
-                        alert("Έχεις ακόμα μία προσπάθεια.");
+                        if (global_lang === 'el') {
+                            alert("Έχεις ακόμα μία προσπάθεια.");
+                        }else{
+                            alert("You can make one more attempt");
+                        }
                     }
 
                     if (nextImageIndex > 10) {
-                        alert("Εχασες.");
+                        if (global_lang === 'el') {
+                            alert("Εχασες.");
+                        }else{
+                            alert("You have lost");
+                        }
                         location.reload();
                         return;
                     }

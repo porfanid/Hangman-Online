@@ -1,8 +1,10 @@
+let global_lang="el";
 function toggleLanguage(lang) {
     const elementsToToggleEL = document.querySelectorAll('.lang-el');
     const elementsToToggleEN = document.querySelectorAll('.lang-en');
 
     if (lang === 'el') {
+        global_lang="el";
         elementsToToggleEL.forEach(element => {
             element.classList.remove('hidden');
         });
@@ -10,6 +12,7 @@ function toggleLanguage(lang) {
             element.classList.add('hidden');
         });
     } else if (lang === 'en') {
+        global_lang="en";
         elementsToToggleEL.forEach(element => {
             element.classList.add('hidden');
         });
